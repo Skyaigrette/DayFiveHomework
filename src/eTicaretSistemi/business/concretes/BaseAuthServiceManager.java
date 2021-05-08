@@ -8,8 +8,8 @@ import eTicaretSistemi.entities.concretes.User;
 
 public abstract class BaseAuthServiceManager implements AuthService{
 	protected ValidationService validationService;
-	private EmailSender emailSender;
-	private UserService userService;
+	protected EmailSender emailSender;
+	protected UserService userService;
 	public BaseAuthServiceManager(ValidationService validationService, EmailSender emailSender, UserService userService) {
 		this.validationService = validationService;
 		this.emailSender = emailSender;
@@ -17,15 +17,7 @@ public abstract class BaseAuthServiceManager implements AuthService{
 	}
 	
 	@Override
-	public void signUp(User user) {
-		if(validationService.checkRegisterInformations(user)) {
-			emailSender.sendEmail("verification message", user);
-			userService.addUser(user);
-			System.out.println("Mailinize doðrulama linki gönderildi.");
-		}else {
-			System.out.println("Girdiðiniz bilgiler kriterlere uymamaktadýr. Lütfen tekrar deneyiniz.");
-		}
-	}
+	public abstract void signUp(User user);
 
 	public abstract void signIn(String email, String password);
 

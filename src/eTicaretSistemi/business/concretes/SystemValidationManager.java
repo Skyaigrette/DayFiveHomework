@@ -28,7 +28,7 @@ public class SystemValidationManager implements ValidationService {
 	}
 	@Override
 	public boolean checkLoginInformations(String email, String password) {
-		if(userService.getByEmail(email).getPassword() == password) {
+		if(userService.getByEmail(email) != null && userService.getByEmail(email).getPassword() == password) {
 			return true;
 		}else {
 			return false;
